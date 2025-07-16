@@ -1,0 +1,207 @@
+/* Custom global styles */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f4f6f3; /* ash_gray 900 */
+  color: #2f3e46; /* charcoal DEFAULT */
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #2f3e46; /* charcoal DEFAULT */
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+a {
+  color: #84a98c; /* cambridge_blue DEFAULT */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover,
+a:focus {
+  color: #52796f; /* hookers_green DEFAULT */
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Enhanced Button Styling */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #000000; /* Ensure black text by default */
+}
+
+/* Primary Button Style */
+.btn-primary {
+  background-color: #52796f; /* hookers_green */
+  color: #000000 !important; /* Force black text */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #3d5a50; /* darker hookers_green */
+  color: #000000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(82, 121, 111, 0.3);
+}
+
+/* Secondary Button Style */
+.btn-secondary {
+  background-color: #84a98c; /* cambridge_blue */
+  color: #000000 !important; /* Force black text */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #6b8a73; /* darker cambridge_blue */
+  color: #000000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(132, 169, 140, 0.3);
+}
+
+/* Outline Button Style */
+.btn-outline {
+  background-color: transparent;
+  color: #52796f !important; /* hookers_green text */
+  border: 2px solid #52796f;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: #52796f;
+  color: #000000 !important; /* Black text on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(82, 121, 111, 0.3);
+}
+
+/* Danger Button Style */
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff !important; /* White text for danger buttons for better contrast */
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Small Button Variant */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Large Button Variant */
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  border-radius: 0.5rem;
+  border: 2px solid #354f52; /* dark_slate_gray DEFAULT */
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #2f3e46;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #84a98c; /* cambridge_blue DEFAULT */
+  box-shadow: 0 0 0 3px rgba(132, 169, 140, 0.2);
+  transform: translateY(-1px);
+}
+
+.text-muted {
+  color: #778a6a; /* ash_gray 300 */
+}
+
+.shadow-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-hover-card:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced shadow for better depth */
+.shadow-hoverCard {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Utility classes for better alignment */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Text truncation utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+  .btn-primary, .btn-secondary, .btn-outline, .btn-danger {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
