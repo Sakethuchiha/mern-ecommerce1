@@ -31,7 +31,7 @@ const Checkout = () => {
         const { data } = await axios.get('http://localhost:5010/api/cart', config);
         setCartItems(data);
       } catch (err) {
-        setError(err.response && err.response.data.message ? err.response.data.message : err.message);
+        setError(err.response?.data?.message || err.message);
       }
     };
     fetchCart();
@@ -45,6 +45,7 @@ const Checkout = () => {
       navigate('/login');
       return;
     }
+
     try {
       const config = {
         headers: {
@@ -52,6 +53,7 @@ const Checkout = () => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+
       const order = {
         orderItems: cartItems,
         shippingAddress,
@@ -60,13 +62,13 @@ const Checkout = () => {
         shippingPrice: 0,
         totalPrice,
       };
+
       const { data } = await axios.post('http://localhost:5010/api/orders', order, config);
-      // Clear cart on backend after order placed
       await axios.delete('http://localhost:5010/api/cart/clear', config).catch(() => {});
       setCartItems([]);
       navigate(`/order/${data._id}`);
     } catch (err) {
-      setError(err.response && err.response.data.message ? err.response.data.message : err.message);
+      setError(err.response?.data?.message || err.message);
     }
   };
 
@@ -75,68 +77,86 @@ const Checkout = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-md bg-ash_gray-900 rounded-xl border border-dark_slate_gray shadow-card">
-      <h2 className="text-3xl font-extrabold text-hookers_green mb-6 text-center">Checkout</h2>
-      {error && <div className="bg-cambridge_blue text-ash_gray-900 px-4 py-2 rounded mb-4 text-sm">{error}</div>}
-      <form onSubmit={submitHandler} className="flex flex-col gap-4">
-        <h4 className="text-xl font-semibold text-hookers_green mb-2">Shipping Address</h4>
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-charcoal">Address</label>
-          <input
-            type="text"
-            name="address"
-            value={shippingAddress.address}
-            onChange={handleChange}
-            required
-            className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-charcoal">City</label>
-          <input
-            type="text"
-            name="city"
-            value={shippingAddress.city}
-            onChange={handleChange}
-            required
-            className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-charcoal">Postal Code</label>
-          <input
-            type="text"
-            name="postalCode"
-            value={shippingAddress.postalCode}
-            onChange={handleChange}
-            required
-            className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-charcoal">Country</label>
-          <input
-            type="text"
-            name="country"
-            value={shippingAddress.country}
-            onChange={handleChange}
-            required
-            className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
-          />
-        </div>
-        <h4 className="text-xl font-semibold text-hookers_green mb-2">Payment Method</h4>
-        <div className="flex flex-col gap-1">
-          <select
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
-          >
-            <option value="PayPal">PayPal</option>
-            <option value="Stripe">Stripe</option>
-          </select>
-        </div>
-        <button type="submit" className="bg-hookers_green text-ash_gray-900 rounded-lg px-4 py-2 font-semibold hover:bg-hookers_green/80 transition mt-4">Place Order</button>
-      </form>
+    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      <div className="card shadow p-5" style={{ maxWidth: '600px', width: '100%' }}>
+        <h2 className="mb-4 text-center fw-bold text-success">Checkout</h2>
+
+        {error && (
+          <div className="alert alert-danger text-center small">{error}</div>
+        )}
+
+        <form onSubmit={submitHandler}>
+          <h5 className="text-success mb-3">Shipping Address</h5>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Address</label>
+            <input
+              type="text"
+              className="form-control"
+              name="address"
+              value={shippingAddress.address}
+              onChange={handleChange}
+              required
+              placeholder="Enter address"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">City</label>
+            <input
+              type="text"
+              className="form-control"
+              name="city"
+              value={shippingAddress.city}
+              onChange={handleChange}
+              required
+              placeholder="Enter city"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Postal Code</label>
+            <input
+              type="text"
+              className="form-control"
+              name="postalCode"
+              value={shippingAddress.postalCode}
+              onChange={handleChange}
+              required
+              placeholder="Enter postal code"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="form-label fw-semibold">Country</label>
+            <input
+              type="text"
+              className="form-control"
+              name="country"
+              value={shippingAddress.country}
+              onChange={handleChange}
+              required
+              placeholder="Enter country"
+            />
+          </div>
+
+          <h5 className="text-success mb-3">Payment Method</h5>
+          <div className="mb-4">
+            <select
+              className="form-select"
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            >
+              <option value="PayPal">PayPal</option>
+              <option value="Stripe">Stripe</option>
+            </select>
+          </div>
+
+          <button type="submit" className="btn btn-success w-100 fw-semibold">
+            Place Order
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

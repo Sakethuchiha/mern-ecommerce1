@@ -12,6 +12,7 @@ import OrderHistory from './pages/OrderHistory';
 import ProtectedRoute from './components/ProtectedRoute';
 import { UserProvider } from './context/UserContext';
 import { CartProvider } from './context/CartContext';
+import AdminProducts from './pages/AdminProducts';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/orders" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/admin" element={<AdminProducts />} />
             </Routes>
           </main>
         </Router>

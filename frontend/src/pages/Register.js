@@ -12,59 +12,91 @@ const Register = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('http://localhost:5010/api/auth/register', { name, email, password });
+      const { data } = await axios.post('http://localhost:5010/api/auth/register', {
+        name,
+        email,
+        password,
+      });
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate('/');
     } catch (err) {
-      setError(err.response && err.response.data.message ? err.response.data.message : err.message);
+      setError(err.response?.data?.message || err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-ash_gray-900 py-8 px-2">
-      <div className="w-50 max-w-md bg-ash_gray-500 border border-dark_slate_gray rounded-2xl shadow-lg p-4 flex flex-col">
-        <h2 className="text-3xl font-extrabold text-hookers_green mb-6 text-center">Create your ShopNest account</h2>
-        {error && <div className="bg-cambridge_blue text-ash_gray-900 px-4 py-2 rounded mb-4 text-sm">{error}</div>}
-        <form onSubmit={submitHandler} className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <label className="font-semibold text-charcoal">Name</label>
+    <div className="d-flex align-items-center justify-content-center min-vh-100 bg-white px-3">
+      <div className="card shadow-lg p-4 rounded-4" style={{ width: '100%', maxWidth: '450px' }}>
+        <h2 className="text-center fw-bold mb-4" style={{ color: '#7A4B3A' }}>
+          Create your ShopNest account
+        </h2>
+
+        {error && (
+          <div className="alert alert-danger text-center py-2 small mb-3">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={submitHandler}>
+          {/* Name */}
+          <div className="mb-3">
+            <label className="form-label text-muted fw-semibold">Name</label>
             <input
               type="text"
+              className="form-control form-control-lg bg-light border border-secondary-subtle"
               placeholder="Enter name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="font-semibold text-charcoal">Email address</label>
+
+          {/* Email */}
+          <div className="mb-3">
+            <label className="form-label text-muted fw-semibold">Email address</label>
             <input
               type="email"
+              className="form-control form-control-lg bg-light border border-secondary-subtle"
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="font-semibold text-charcoal">Password</label>
+
+          {/* Password */}
+          <div className="mb-4">
+            <label className="form-label text-muted fw-semibold">Password</label>
             <input
               type="password"
+              className="form-control form-control-lg bg-light border border-secondary-subtle"
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="border border-dark_slate_gray rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cambridge_blue bg-ash_gray-300 text-charcoal"
             />
           </div>
-          <button type="submit" className="bg-hookers_green text-ash_gray-900 rounded-lg px-4 py-2 font-semibold hover:bg-hookers_green/80 transition">Register</button>
+
+          {/* Submit Button */}
+          <div className="d-grid">
+            <button
+              type="submit"
+              className="btn btn-success btn-lg fw-semibold shadow"
+              style={{ backgroundColor: '#76B041', border: 'none' }}
+            >
+              Register
+            </button>
+          </div>
         </form>
-        <p className="mt-6 text-center text-charcoal">
-          Have an Account?{' '}
-          <Link to="/login" className="text-hookers_green hover:underline font-semibold">Login</Link>
-        </p>
+
+        <div className="text-center mt-4">
+          <p className="text-muted">
+            Have an account?{' '}
+            <Link to="/login" className="text-success fw-semibold text-decoration-none">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
