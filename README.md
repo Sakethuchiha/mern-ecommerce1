@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🛒 MERN E-Commerce
 
 A full-stack e-commerce web application built with the **MERN stack** (MongoDB, Express, React, Node.js).
@@ -118,3 +119,55 @@ npm run dev
 
 ---
 
+=======
+# MERN E-Commerce
+
+A full-stack e-commerce web application built with the MERN stack (MongoDB, Express, React, Node.js).
+
+## Features
+
+### Frontend (React)
+- **User Registration & Login:**
+  - Users can register and log in securely.
+  - JWT token is used for authentication and is stored in local storage.
+  - The logged-in user's name is displayed in the navbar.
+- **Product Listing & Details:**
+  - View all products on the home page.
+  - Click on a product to view its details.
+- **Cart Functionality:**
+  - Add products to the cart from the product list or details page.
+  - Update the quantity of items in the cart; the total amount updates automatically.
+  - Cart items persist even after logout (using Redux for state management).
+- **Checkout Flow:**
+  - Enter shipping address and view order details during checkout.
+  - Multiple payment options (UI only; integration can be added).
+
+### Backend (Node.js, Express)
+- **Authentication:**
+  - Uses JWT tokens for secure authentication and protected routes.
+- **MongoDB Database:**
+  - Three main collections:
+    - `users`: Stores user information and credentials.
+    - `products`: Stores product details.
+    - `cart`: Stores each user's cart items.
+    - `orders`: Stores order details after checkout.
+  - All frontend actions (cart, orders, user info) are reflected in the database.
+
+### State Management
+- **Redux** is used for global state management (user, cart, etc.), ensuring cart items persist across sessions and after logout.
+
+## How It Works
+- Register or log in to start shopping.
+- Browse products, add them to your cart, and update quantities as needed.
+- Proceed to checkout, enter your address, and select a payment option.
+- Orders, cart, and user info are managed in MongoDB and reflected in the UI.
+
+## Setup
+1. Clone the repo and install dependencies in both `backend` and `frontend` folders.
+2. Set up your MongoDB connection string in the backend `.env` file.
+3. Start the backend and frontend servers.
+
+---
+
+**Enjoy your shopping experience with ShopNest!**
+>>>>>>> e1c3a69 (changes)

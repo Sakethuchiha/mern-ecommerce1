@@ -37,51 +37,60 @@ const ProductDetails = () => {
     navigate('/cart');
   };
 
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <div className="text-center mt-5">Loading...</div>;
 
   const images = product.images && product.images.length > 0 ? product.images : [product.image];
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl bg-ash_gray-900 rounded-xl border border-dark_slate_gray shadow-card">
-      <h2 className="text-4xl font-extrabold mb-6 text-hookers_green">{product.name}</h2>
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="flex flex-col items-center md:items-start">
+    <div className="container py-5">
+      <div className="row bg-light rounded-4 shadow-sm p-4">
+        {/* Left Column - Images */}
+        <div className="col-lg-6 mb-4 mb-lg-0 text-center">
           <img
             src={selectedImage || 'https://via.placeholder.com/512'}
             alt={product.name}
-            className="w-full max-w-lg mx-auto md:mx-0 rounded-xl mb-4 shadow-lg"
+            className="img-fluid rounded-4 shadow-sm mb-3"
+            style={{ maxHeight: '400px', objectFit: 'cover' }}
           />
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-            {images.length > 1 && images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`${product.name}-${idx}`}
-                className={`w-24 h-24 object-cover rounded-lg cursor-pointer border-4 transition-colors duration-300 ${
-                  selectedImage === img ? 'border-hookers_green' : 'border-transparent hover:border-hookers_green/70'
-                }`}
-                onClick={() => setSelectedImage(img)}
-              />
-            ))}
+
+          {/* Thumbnail images */}
+          <div className="d-flex flex-wrap justify-content-center gap-2">
+            {images.length > 1 &&
+              images.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`${product.name}-${idx}`}
+                  className={`img-thumbnail border-2 ${selectedImage === img ? 'border-success' : ''}`}
+                  style={{ width: '80px', height: '80px', objectFit: 'cover', cursor: 'pointer' }}
+                  onClick={() => setSelectedImage(img)}
+                />
+              ))}
           </div>
         </div>
-        <div className="flex-1">
-          <p className="mb-6 text-charcoal text-lg leading-relaxed">{product.description}</p>
-          <h3 className="text-3xl font-bold mb-6 text-hookers_green">${product.price.toFixed(2)}</h3>
-          <div className="mb-6">
-            <label htmlFor="qty" className="block mb-2 font-semibold text-charcoal">Quantity:</label>
+
+        {/* Right Column - Product Info */}
+        <div className="col-lg-6">
+          <h2 className="fw-bold text-success mb-3">{product.name}</h2>
+          <p className="text-muted mb-4">{product.description}</p>
+
+          <h3 className="fw-bold text-dark mb-4">${product.price.toFixed(2)}</h3>
+
+          <div className="mb-4">
+            <label htmlFor="qty" className="form-label fw-semibold">Quantity:</label>
             <input
               type="number"
               id="qty"
               min="1"
               value={qty}
               onChange={(e) => setQty(Number(e.target.value))}
-              className="border border-dark_slate_gray rounded-lg p-3 w-24 focus:outline-none focus:ring-2 focus:ring-cambridge_blue text-charcoal"
+              className="form-control w-25"
             />
           </div>
+
           <button
             onClick={addToCartHandler}
-            className="bg-hookers_green text-ash_gray-900 px-8 py-3 rounded-xl hover:bg-hookers_green/80 transition-colors duration-300 font-semibold"
+            className="btn btn-success btn-lg px-4"
           >
             Add to Cart
           </button>
