@@ -168,6 +168,17 @@ A full-stack e-commerce web application built with the MERN stack (MongoDB, Expr
 3. Start the backend and frontend servers.
 
 ---
+## 🔐 Admin Functionality
 
-**Enjoy your shopping experience with ShopNest!**
->>>>>>> e1c3a69 (changes)
+Admins can manage products from the dashboard:
+
+### ➕ Create Product
+- Navigate to the admin dashboard
+- Fill in product details (name, price, description, image, stock, etc.)
+- Submit sends a POST request to `/api/products`
+
+### ✏️ Update Product
+- Click on a product in the list
+- Edit the fields as needed
+- Submit sends a PUT request to `/api/products/:id`
+
